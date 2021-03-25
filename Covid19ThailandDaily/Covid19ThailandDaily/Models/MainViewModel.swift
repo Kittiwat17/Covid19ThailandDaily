@@ -21,15 +21,12 @@ class MainViewModel {
     func savePin(pin: String) {
         defaults.set(pin, forKey: "keyPin")
         loadPin()
-        print("save success \(pin)")
     }
     
     func loadPin() {
         if let stringOne = defaults.string(forKey: "keyPin") {
             self.pin = stringOne
-            print(stringOne) // Some String Value
         }
-        print("load fail")
     }
     
     func fecthData(pickerData: @escaping ([String], Int) -> ()) {
@@ -51,7 +48,7 @@ class MainViewModel {
     func loadDetail(countryDetail: @escaping (CMOneResponse) -> ()) {
         AF.request("https://corona.lmao.ninja/v2/countries/\(selectedCountry)").responseDecodable(of: CMOneResponse.self ) { (countries) in
             guard let country = countries.value else{ return }
-            print(country)
+            
             countryDetail(country)
         }
     }

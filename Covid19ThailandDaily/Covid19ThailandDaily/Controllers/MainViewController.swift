@@ -36,9 +36,7 @@ class MainViewController: UIViewController {
             self.countriesPicker.reloadAllComponents()
             self.viewModel.loadDetail { detail in
                 self.setCountryDetail(detail: detail)
-                print(detail.country)
             }
-            print(row)
             self.countriesPicker.selectRow(row, inComponent: 0, animated: true)
         }
         pinButton.backgroundColor = UIColor.green
@@ -47,13 +45,6 @@ class MainViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    fileprivate func showAlert(msg: String) {
-        let alert = UIAlertController(title: "", message: msg, preferredStyle: .alert)
-        let action = UIAlertAction(title: "ตกลง", style: .default)
-        alert.addAction(action)
-        present(alert, animated: true)
     }
     
     func setCountryDetail(detail: CMOneResponse){
@@ -89,7 +80,6 @@ extension MainViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         viewModel.loadDetail { detail in
             self.setCountryDetail(detail: detail)
         }
-        
         self.pinButton.backgroundColor = UIColor.lightGray
         guard viewModel.pin == pickerData[row] else{ return }
         self.pinButton.backgroundColor = UIColor.green
